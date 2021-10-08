@@ -6,13 +6,12 @@ async function main(){
 
 
 }
-async function display(){
+async function display(fun){
     try{
         
         let text= await main()
         for(i=0;i<text.length-1;i++){
-        console.log(text[i]);
-         console.log(text[i]);
+        
          names=text[i]["Country_text"]
          totc=text[i]["Total Cases_text"]
          totd=text[i]["Total Deaths_text"]
@@ -26,7 +25,7 @@ async function display(){
 
 
 
-        let first=document.createElement("div")
+        let first=document.createElement("ul")
         first.className="p-2 bd-highlight"
         let second=document.createElement("div")
         second.className="card "
@@ -35,10 +34,10 @@ async function display(){
         
          let third=document.createElement("div")
          third.className="card-body "
-         cardtitle="gcgjg"
+         
          third.innerHTML=`<h5 class="card-title">${names}</h5>
          <br>
-         <p class="card-text"><b>Total cases:</b> ${totc}<br>
+         <p class="card-text  "><b>Total cases:</b> ${totc}<br>
          <b>Total deaths:</b> ${totd}<br>
          <b>Total recovered:</b> ${totr}<br>
          <b>New deaths:</b> ${newd}<br>
@@ -51,12 +50,35 @@ async function display(){
         first.appendChild(second)
         let s=document.getElementById("id")
         s.appendChild(first)
-        }
-      
+        
+    }
+    fun()
     }catch(err){
         console.log(err);}
     }
+  
 
-display()
+display(find)
+function find(){
+    val=document.getElementById("search").value
+    val=val.toLowerCase()
+    console.log(val);
+
+     value=document.querySelectorAll("ul")
+     Array.from(value).forEach(function(valuee){
+         var ss=valuee.querySelector(".card-title").textContent
+         if(ss.toLowerCase().indexOf(val)!= -1){
+             valuee.style.display="block"
+
+         }
+         else{
+            valuee.style.display="none"
+         }
+     })
+
+
+}
+
+
 
  
